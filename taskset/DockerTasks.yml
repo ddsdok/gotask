@@ -3,13 +3,6 @@
 version: '2'
 
 tasks:
-  create:
-    desc: Create a Docker image.
-    cmds:
-      - echo "Create a Docker environment image for building Golang projects with go-task as Makefile ..."
-      - docker build -t {{ toSlash "ddsdok/gotask" }} .
-    silent: true
-
   login:
     desc: Login to Docker Hub.
     cmds:
@@ -17,8 +10,16 @@ tasks:
       - docker login docker.io
     silent: true
 
+  create:
+    deps: [login]
+    desc: Create a Docker image.
+    cmds:
+      - echo "Create a Docker environment image for building Golang projects with go-task as Makefile ..."
+      - docker build -t {{ toSlash "ddsdok/gotask" }} .
+    silent: true
+
   push:
-    deps: [create, login]
+    deps: [create]
     desc: Push Docker image to Docker Hub repo.
     cmds:
       - echo "Pushing Docker image on repo ..."
