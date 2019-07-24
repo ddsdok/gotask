@@ -1,0 +1,19 @@
+# https://taskfile.dev
+
+version: '2'
+
+tasks:
+  create:
+    desc: Create a Docker image.
+    cmds:
+      - echo "Create a Docker environment image for building Golang projects with go-task as Makefile ..."
+      - docker build -t {{ toSlash "ddsdok/gotask" }} -f Dockerfile .
+    silent: true
+
+  push:
+    deps: [create]
+    desc: Push Docker image to Docker Hub repo.
+    cmds:
+      - echo "Pushing Docker image on repo ..."
+      - docker push {{ toSlash "ddsdok/gotask" }}
+    silent: true
