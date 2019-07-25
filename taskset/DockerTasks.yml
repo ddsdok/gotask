@@ -14,7 +14,7 @@ tasks:
     deps: [login]
     desc: Create a Docker image.
     cmds:
-      - echo "Create a Docker environment image for building Golang projects with go-task as Makefile ..."
+      - echo "Create a Docker build image for building Golang projects with go-task as Makefile ..."
       - docker build -t {{ toSlash "ddsdok/gotask" }} .
     silent: true
 
